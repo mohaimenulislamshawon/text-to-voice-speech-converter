@@ -1,0 +1,95 @@
+/* Reset default margin and padding */
+body, form, p {
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+
+  text-align: center;
+}
+
+/* Center align content */
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+}
+
+
+
+form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+textarea {
+    width: 90%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    resize: vertical;
+}
+
+select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    appearance: none; /* Remove default arrow on some browsers */
+    background: url('down-arrow.png') no-repeat right center; /* Use your own arrow icon */
+    background-size: 20px 20px; /* Adjust icon size */
+    cursor: pointer;
+}
+
+button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+p {
+    text-align: center;
+    margin-top: 20px;
+}
+
+audio {
+    width: 100%;
+    margin-top: 20px;
+}
+
+/* Footer styles */
+.footer {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.footer-text {
+    font-size: 14px;
+    color: #777;
+}
+
+.footer-link {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.footer-link:hover {
+    text-decoration: underline;
+}
