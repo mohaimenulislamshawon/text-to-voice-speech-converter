@@ -3,66 +3,66 @@
 <head>
     <title>Text to Speech Converter</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="styles.css">
+
+    <link rel="stylesheet" type="text/css" href="../static/styles.css">
+
 </head>
 <body> 
     <h1>Text to Speech Converter</h1>
     
-    <form id="conversion-form">
-        <textarea id="text-input" placeholder="Enter text"></textarea>
+    <form method="POST">
+        <textarea name="text" placeholder="Enter text"></textarea>
         <br>
         <label for="language">Select Language:</label>
-        <select id="language-select">
-            <option value="en">English</option>
-            <option value="bn">Bengali</option>
-            <!-- Add more options here -->
+        <select name="language">
+                <option value="en">English</option>
+                <option value="bn">Bengali</option>
+                <option value="es">Spanish</option>
+                <option value="fr">French</option>
+                <option value="de">German</option>
+                <option value="it">Italian</option>
+                <option value="pt">Portuguese</option>
+                <option value="ru">Russian</option>
+                <option value="zh">Chinese</option>
+                <option value="ar">Arabic</option>
+                <option value="hi">Hindi</option>
+                <option value="ja">Japanese</option>
+                <option value="ko">Korean</option>
+                <option value="tr">Turkish</option>
+                <option value="nl">Dutch</option>
+                <option value="pl">Polish</option>
+                <option value="sv">Swedish</option>
+                <option value="uk">Ukrainian</option>
+                <option value="vi">Vietnamese</option>
+                <option value="id">Indonesian</option>
         </select>
         <br>
-        <button type="button" onclick="convertTextToSpeech()">Convert</button>
+        <button type="submit">Convert</button>
     </form>
 
-    <div id="audio-player-container" style="display: none;">
-        <audio controls preload="auto" id="audio-player">
-            Your browser does not support the audio element.
-        </audio>
-        <a id="download-link" style="display: none;" download><button>Download</button></a>
-    </div>
+    {% if message %}
+    <p>{{ message }}</p>
+    <audio controls preload="auto" id="audio-player">
+    <source src="{{ url_for('play', filename=audio) }}" type="audio/mpeg">
+    Your browser does not support the audio element.
+    </audio>
+    <a href="{{ url_for('download', filename=audio) }}" download><button>Download</button></a>
+    {% endif %}
 
-    <footer class="footer">
+    {% if error %}
+    <p style="color: red;">{{ error }}</p>
+    {% endif %}
+    <script>
+    function playAudio() {
+        const audioPlayer = document.getElementById("audio-player");
+        audioPlayer.play();
+    }
+    </script>
+<footer class="footer">
         <p class="footer-text">
             © Created by <a href="https://about.me/mohaimenulislamshawon/" target="_blank" class="footer-link">Shawon</a>
         </p>
-    </footer>
+</footer>
 
-    <script>
-        async function convertTextToSpeech() {
-            const text = document.getElementById("text-input").value;
-            const language = document.getElementById("language-select").value;
-
-            const response = await fetch("URL_TO_YOUR_FLASK_ENDPOINT", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({ text, language })
-            });
-
-            if (response.ok) {
-                const blob = await response.blob();
-                const audioPlayer = document.getElementById("audio-player");
-                const audioPlayerContainer = document.getElementById("audio-player-container");
-                const downloadLink = document.getElementById("download-link");
-
-                audioPlayer.src = URL.createObjectURL(blob);
-                audioPlayerContainer.style.display = "block";
-                downloadLink.style.display = "block";
-                downloadLink.href = URL.createObjectURL(blob);
-                downloadLink.download = "output.mp3";
-            } else {
-                // Handle error
-                console.error("Error converting text to speech:", response.status);
-            }
-        }
-    </script>
 </body>
 </html>
